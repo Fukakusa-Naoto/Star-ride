@@ -37,7 +37,7 @@ public class PlayerUIController_F : MonoBehaviour
     }
 
 
-	private void Update()
+	private void FixedUpdate()
 	{
 		m_sendForce = Vector2.zero;
 	}
@@ -63,6 +63,8 @@ public class PlayerUIController_F : MonoBehaviour
 	/// </summary>
 	public void OnMouseDown()
 	{
+		Debug.Log("ドラック開始イベント");
+
 		m_dragStart = this.GetMousePosition();
 	}
 
@@ -72,12 +74,14 @@ public class PlayerUIController_F : MonoBehaviour
 	public void OnMouseDrag()
 	{
 		var position = this.GetMousePosition();
+		Debug.Log(position);
 
 		m_currentForce = position - m_dragStart;
 		if (m_currentForce.magnitude > MaxMagnitude * MaxMagnitude)
 		{
 			m_currentForce *= MaxMagnitude / m_currentForce.magnitude;
 		}
+		Debug.Log(m_currentForce);
 	}
 
 	/// <summary>
@@ -85,13 +89,15 @@ public class PlayerUIController_F : MonoBehaviour
 	/// </summary>
 	public void OnMouseUp()
 	{
+		Debug.Log("ドラック終了イベント");
+
 		m_sendForce = m_currentForce;
 	}
 
 
 	public Vector2 GetSendForce()
 	{
-		Debug.Log(m_sendForce);
+		//Debug.Log(m_sendForce);
 		return m_sendForce;
 	}
 }
