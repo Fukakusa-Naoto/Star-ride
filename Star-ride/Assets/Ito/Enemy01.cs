@@ -165,8 +165,8 @@ public class Enemy01 : MonoBehaviour
         //}
     }
 
-    void OnHit(Object* object)
-    {
+    //void OnHit(Object* object)
+    //{
         //// 思考タイマーを初期化
         //m_thinkTimer = THINK_INTERVAL;
         //// 衝突したのでいったん停止させる
@@ -178,7 +178,7 @@ public class Enemy01 : MonoBehaviour
         //AddForce(angle, object->GetHitForce());
         //// 衝突状態へ
         //m_state = STATE_HIT;
-    }
+    //}
 
     void Reset()
     {
