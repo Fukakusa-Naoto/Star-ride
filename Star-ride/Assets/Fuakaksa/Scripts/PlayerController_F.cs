@@ -21,6 +21,6 @@ public class PlayerController_F : MonoBehaviour
 		m_rigidbody.AddForce(m_controller.GetSendForce(), ForceMode2D.Impulse);
 
 		// 減速処理
-		m_rigidbody.velocity *= 0.9f;
+		if (m_rigidbody.velocity.magnitude > 0.8f) m_rigidbody.velocity *= 0.9f;
     }
 }

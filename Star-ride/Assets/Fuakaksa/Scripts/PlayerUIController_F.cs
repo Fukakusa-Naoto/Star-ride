@@ -19,10 +19,11 @@ public class PlayerUIController_F : MonoBehaviour
 {
 	// <メンバ定数>
 	// 最大付与力量
-	private const float MAX_MAGNITUDE = 5.0f;
+	private const float MAX_MAGNITUDE = 40.0f;
 
 	// <メンバ変数>
 	// 溜めた値
+	[SerializeField]
 	private float m_sinkValue = 0;
 	// 送る力
 	private Vector2 m_sendForce = Vector2.zero;
@@ -103,29 +104,52 @@ public class PlayerUIController_F : MonoBehaviour
 		m_dragStart = this.GetMousePosition();
 	}
 
-	/// <summary>
-	/// ドラッグ中イベントハンドラ
-	/// </summary>
+
+
+	//--------------------------------------------------------------------
+	//! @summary   ドラック中イベントハンドラ
+	//!
+	//! @parameter [void] なし
+	//!
+	//! @return    なし
+	//--------------------------------------------------------------------
 	public void OnMouseDrag()
 	{
 		var position = this.GetMousePosition();
 
+		// チャージする
+		m_sinkValue += Time.deltaTime * 20.0f;
+
 		m_currentForce = position - m_dragStart;
-		if (m_currentForce.magnitude > MAX_MAGNITUDE * MAX_MAGNITUDE)
-		{
-			m_currentForce *= MAX_MAGNITUDE / m_currentForce.magnitude;
-		}
+		if (m_sinkValue > MAX_MAGNITUDE) m_sinkValue = MAX_MAGNITUDE;
+
+		m_currentForce = m_currentForce.normalized * m_sinkValue;
 	}
 
-	/// <summary>
-	/// ドラッグ終了イベントハンドラ
-	/// </summary>
+
+
+	//--------------------------------------------------------------------
+	//! @summary   ドラック終了イベントハンドラ
+	//!
+	//! @parameter [void] なし
+	//!
+	//! @return    なし
+	//--------------------------------------------------------------------
 	public void OnMouseUp()
 	{
+		m_sinkValue = 0.0f;
 		m_sendForce = m_currentForce;
 	}
 
 
+
+	//--------------------------------------------------------------------
+	//! @summary   移動量を送る
+	//!
+	//! @parameter [void] なし
+	//!
+	//! @return    なし
+	//--------------------------------------------------------------------
 	public Vector2 GetSendForce()
 	{
 		return m_sendForce;
