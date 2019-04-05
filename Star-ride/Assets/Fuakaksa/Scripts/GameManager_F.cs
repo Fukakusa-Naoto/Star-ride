@@ -8,9 +8,18 @@ public class GameManager_F : MonoBehaviour
 	private static int SCREEN_WIDTH = 10;
 	private static int SCREEN_HEIGHT = 10;
 
-
-    // Start is called before the first frame update
-    void Start()
+	void Awake()
+	{
+		// PC向けビルドだったらサイズ変更
+		if (Application.platform == RuntimePlatform.WindowsPlayer ||
+		Application.platform == RuntimePlatform.OSXPlayer ||
+		Application.platform == RuntimePlatform.LinuxPlayer)
+		{
+			Screen.SetResolution(SCREEN_WIDTH, SCREEN_HEIGHT, false);
+		}
+	}
+		// Start is called before the first frame update
+		void Start()
     {
 
     }
