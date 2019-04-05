@@ -47,7 +47,7 @@ public class Enemy01 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -165,8 +165,13 @@ public class Enemy01 : MonoBehaviour
         //}
     }
 
+<<<<<<< HEAD
     //void OnHit(Object* object)
     //{
+=======
+    void OnHit(object o)
+    {
+>>>>>>> 086abd7ec8517177d9f60879060decd24b1635fb
         //// 思考タイマーを初期化
         //m_thinkTimer = THINK_INTERVAL;
         //// 衝突したのでいったん停止させる
