@@ -5,8 +5,8 @@ using UnityEngine;
 public class GameManager_F : MonoBehaviour
 {
 	// スクリーンサイズ
-	private static int SCREEN_WIDTH = 10;
-	private static int SCREEN_HEIGHT = 10;
+	private static int SCREEN_WIDTH = 375;
+	private static int SCREEN_HEIGHT = 667;
 
 	void Awake()
 	{
