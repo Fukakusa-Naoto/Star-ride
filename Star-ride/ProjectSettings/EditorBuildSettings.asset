@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Takemoto/Scenes/TitleScene.unity
+    guid: 3a1ddb7622b657548baf418d5f7d2a1d
+  - enabled: 1
+    path: Assets/Takemoto/Scenes/GameScene.unity
+    guid: 31588840c40ee5849a06846cf7ba4cfc
+  - enabled: 1
+    path: Assets/Takemoto/Scenes/ResultScene.unity
+    guid: 34cbe239bfdc6894cb748eeb52b71bcd
   m_configObjects: {}
