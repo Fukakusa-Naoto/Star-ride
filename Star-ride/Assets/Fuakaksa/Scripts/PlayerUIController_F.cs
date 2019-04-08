@@ -124,6 +124,8 @@ public class PlayerUIController_F : MonoBehaviour
 		if (m_sinkValue > MAX_MAGNITUDE) m_sinkValue = MAX_MAGNITUDE;
 
 		m_currentForce = m_currentForce.normalized * m_sinkValue;
+
+		Rotation();
 	}
 
 
@@ -144,6 +146,20 @@ public class PlayerUIController_F : MonoBehaviour
 
 
 	//--------------------------------------------------------------------
+	//! @summary   回転させる
+	//!
+	//! @parameter [void] なし
+	//!
+	//! @return    なし
+	//--------------------------------------------------------------------
+	private void Rotation()
+	{
+		float angle = Mathf.Atan2(m_currentForce.y, m_currentForce.x);
+		transform.rotation=Quaternion.Euler(0,0,(angle*Mathf.Rad2Deg)-90.0f);
+	}
+
+
+	//--------------------------------------------------------------------
 	//! @summary   移動量を送る
 	//!
 	//! @parameter [void] なし
@@ -153,5 +169,19 @@ public class PlayerUIController_F : MonoBehaviour
 	public Vector2 GetSendForce()
 	{
 		return m_sendForce;
+	}
+
+
+
+	//--------------------------------------------------------------------
+	//! @summary   回転角を送る
+	//!
+	//! @parameter [void] なし
+	//!
+	//! @return    なし
+	//--------------------------------------------------------------------
+	public Quaternion GetRotation()
+	{
+		return transform.rotation;
 	}
 }
