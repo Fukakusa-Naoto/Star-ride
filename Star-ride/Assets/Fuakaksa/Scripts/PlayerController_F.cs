@@ -22,5 +22,8 @@ public class PlayerController_F : MonoBehaviour
 
 		// 減速処理
 		if (m_rigidbody.velocity.magnitude > 0.8f) m_rigidbody.velocity *= 0.9f;
+
+		// 回転の反映
+		transform.rotation = m_controller.GetRotation();
     }
 }
