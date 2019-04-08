@@ -133,10 +133,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: 2.46
 =======
       value: 10
 >>>>>>> 75beab8f655e2dd0a92b9a8ed23e5a6a6092fc55
+=======
+      value: 10
+=======
+      value: 2.46
+>>>>>>> 9fa10e68b5c21f91972799d941a200ecfde1fa90
+>>>>>>> 46beef35c3b1e94acbecf07c8e5d3cc4ebfed09c
       objectReference: {fileID: 0}
     - target: {fileID: 8767369701614554327, guid: c58f8b44c285c1f4ab46a6e56c544030,
         type: 3}
@@ -472,6 +479,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
 <<<<<<< HEAD
+<<<<<<< HEAD
   - component: {fileID: 1521544786}
   - component: {fileID: 1521544785}
   - component: {fileID: 1521544787}
@@ -479,6 +487,15 @@ GameObject:
   - component: {fileID: 1489831717}
   - component: {fileID: 1489831716}
 >>>>>>> 75beab8f655e2dd0a92b9a8ed23e5a6a6092fc55
+=======
+  - component: {fileID: 1489831717}
+  - component: {fileID: 1489831716}
+=======
+  - component: {fileID: 1521544786}
+  - component: {fileID: 1521544785}
+  - component: {fileID: 1521544787}
+>>>>>>> 9fa10e68b5c21f91972799d941a200ecfde1fa90
+>>>>>>> 46beef35c3b1e94acbecf07c8e5d3cc4ebfed09c
   m_Layer: 0
   m_Name: background_below
   m_TagString: Untagged
@@ -543,12 +560,21 @@ Transform:
   m_GameObject: {fileID: 1489831715}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_LocalPosition: {x: -0.556, y: -3.903, z: 0}
   m_LocalScale: {x: 0.467, y: 0.467, z: 0.467}
 =======
   m_LocalPosition: {x: 0, y: -30, z: 0}
   m_LocalScale: {x: 3.3, y: 3.1, z: 1}
 >>>>>>> 75beab8f655e2dd0a92b9a8ed23e5a6a6092fc55
+=======
+  m_LocalPosition: {x: 0, y: -30, z: 0}
+  m_LocalScale: {x: 3.3, y: 3.1, z: 1}
+=======
+  m_LocalPosition: {x: -0.556, y: -3.903, z: 0}
+  m_LocalScale: {x: 0.467, y: 0.467, z: 0.467}
+>>>>>>> 9fa10e68b5c21f91972799d941a200ecfde1fa90
+>>>>>>> 46beef35c3b1e94acbecf07c8e5d3cc4ebfed09c
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
