@@ -16,9 +16,8 @@ public class Enemy01 : MonoBehaviour
     // 敵の状態
     STATE m_state = STATE.STATE_NORMAL;
 
-    // プレイヤーを取得
-    GameObject player;
-    GameObject enemy;
+    // 点数
+    int SCORE;
 
     // 床との判定用の幅と高さ
     float WIDTH;
@@ -45,19 +44,19 @@ public class Enemy01 : MonoBehaviour
     // 経過時間
     float elapsedTime = 0.0f;
 
-    // 速度
-    Vector3 vec;
-
     // Start is called before the first frame update
     void Start()
     {
-        this.player = GameObject.Find("Player");
-        this.enemy = GameObject.Find("Enemy");
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        //// アクティブフラグがfalseの場合は何もしない
+        //if (!m_activeFlag) return true;
+
         // 状態によって処理を分岐させる
         switch (this.m_state)
         {
@@ -105,35 +104,13 @@ public class Enemy01 : MonoBehaviour
         //}
 
     }
-    int GetDir(GameObject player)
-    {
-        // ターゲットへのベクトルを求める
-        Vector3 v = this.player.transform.position - this.enemy.transform.position;
 
-        //// 内積を使い一番近い角度を求める
-        //Matrix rotY = Matrix::CreateRotationY(XMConvertToRadians(45.0f));
-        //Vector3 dirVec = new Vector3(0.0f, 0.0f, -1.0f);
-        //int dir = 0;
-        //float maxVal = dirVec.Dot(v, v);
-        //// 内積が一番大きい方向が近い
-        //for (int i = 0; i < 7; i++)
-        //{
-        //    dirVec = Vector3::Transform(dirVec, rotY);
-        //    float val = dirVec.Dot(v);          
-        //    if (val > maxVal)
-        //    {
-        //        dir = i + 1;
-        //        maxVal = val;
-        //    }
-        //}
-
-        
-        return 0;// dir;
-    }
 
     void State_Normal(float elapsedTime)
     {
-        
+        //// プレイヤーを取得
+        //Object* target = m_gameWindow->GetStage()->GetPlayer();
+
         //// 定期的に向きを変える
         //m_thinkTimer += elapsedTime;
         //if (m_thinkTimer >= THINK_INTERVAL)
@@ -167,26 +144,42 @@ public class Enemy01 : MonoBehaviour
 
     void State_Hit(float elapsedTime)
     {
-        // 摩擦により停止したら
-        if (vec == new Vector3(0.0f, 0.0f, 0.0f)) 
-        {
-            m_state = STATE.STATE_NORMAL;
-        }
+        //// 摩擦により停止したら
+        //if (m_v == Vector3::Zero)
+        //{
+        //    m_state = STATE_NORMAL;
+        //}
     }
 
     void State_Fall(float elapsedTime)
     {
-        // 下に落ちる
-        this.enemy.transform.position += new Vector3(0.0f, -1.0f, 0.0f);
+        //// 下に落ちる
+        //m_pos.y -= GameWindow::FALL_SPEED * elapsedTime;
 
-        // ある程度落下したら
-        if (this.enemy.transform.position.y < 0)
-        {
-            m_state = STATE.STATE_DEAD;
-           
-        }
+        //// ある程度落下したら
+        //if (m_pos.y < -GameWindow::FALL_DISTANCE)
+        //{
+        //    m_state = STATE_DEAD;
+        //    // 表示（OFF）
+        //    SetDisplayFlag(false);
+        //}
     }
-    
+
+    void OnHit(object o)
+    {
+        //// 思考タイマーを初期化
+        //m_thinkTimer = THINK_INTERVAL;
+        //// 衝突したのでいったん停止させる
+        //m_v = Vector3::Zero;
+        //// 衝突した相手へのベクトルを求めて移動方向を算出
+        //Vector3 v = object->GetPosition() - this->GetPosition();
+        //float angle = atan2f(v.x, v.z);
+        //// 相手から受ける力を加える
+        //AddForce(angle, object->GetHitForce());
+        //// 衝突状態へ
+        //m_state = STATE_HIT;
+    }
+
     void Reset()
     {
         //// 停止させ位置と向きをリセットする
@@ -195,14 +188,14 @@ public class Enemy01 : MonoBehaviour
         //m_pos = Vector3((float)m_x, 0.0f, (float)m_y);
         //m_thinkTimer = THINK_INTERVAL;
 
-        // 落下中の場合は死亡扱いにする
-        if (m_state == STATE.STATE_FALL)
-        {
-            // 死亡
-            m_state = STATE.STATE_DEAD;
-            // 表示（OFF）
-            this.enemy.SetActive(false);
-        }
+        //// 落下中の場合は死亡扱いにする
+        //if (m_state == STATE_FALL)
+        //{
+        //    // 死亡
+        //    m_state = STATE_DEAD;
+        //    // 表示（OFF）
+        //    SetDisplayFlag(false);
+        //}
     }
 
 
