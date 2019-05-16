@@ -102,7 +102,7 @@ public class PlayerUIController_F : MonoBehaviour
 	public void OnMouseDown()
 	{
 		m_dragStart = this.GetMousePosition();
-	}
+    }
 
 
 
@@ -120,12 +120,17 @@ public class PlayerUIController_F : MonoBehaviour
 		// チャージする
 		m_sinkValue += Time.deltaTime * 20.0f;
 
+        // ドラッグした距離を求める
 		m_currentForce = position - m_dragStart;
+
+        // 送る力が上限以上だったら上限値に戻す
 		if (m_sinkValue > MAX_MAGNITUDE) m_sinkValue = MAX_MAGNITUDE;
 
+        // 正規化しベクトルは同じ方向は維持したままで、長さを1にする
 		m_currentForce = m_currentForce.normalized * m_sinkValue;
 
-		Rotation();
+        // 動きを求める
+        //Rotation();
 	}
 
 
@@ -141,7 +146,9 @@ public class PlayerUIController_F : MonoBehaviour
 	{
 		m_sinkValue = 0.0f;
 		m_sendForce = m_currentForce;
-	}
+        // キャラの画像方向指定
+        Rotation();
+    }
 
 
 
@@ -155,8 +162,8 @@ public class PlayerUIController_F : MonoBehaviour
 	private void Rotation()
 	{
 		float angle = Mathf.Atan2(m_currentForce.y, m_currentForce.x);
-		transform.rotation=Quaternion.Euler(0,0,(angle*Mathf.Rad2Deg)-90.0f);
-	}
+        transform.rotation = Quaternion.Euler(0, 0, (angle * Mathf.Rad2Deg) - 90.0f);
+    }
 
 
 	//--------------------------------------------------------------------
