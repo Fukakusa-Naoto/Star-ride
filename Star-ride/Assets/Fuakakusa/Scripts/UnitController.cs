@@ -15,18 +15,23 @@ public class UnitController : MonoBehaviour
 	// 復活までの時間
 	private float m_respawnTime = 0.0f;
 
+    // プレイヤーの情報
+    private GameObject m_player;
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
     {
 		// 最初の座標を保存
 		m_startPosition = transform.position;
 
 		m_isFall = false;
 
-		// 剛体コンポーネントの取得
-		m_rigitbody = GetComponent<Rigidbody2D>();
-	}
+        // プレイヤーの取得
+        m_player = GameObject.Find("ControllerUI");
+
+        // 剛体コンポーネントの取得
+        m_rigitbody = GetComponent<Rigidbody2D>();
+    }
 
 	// Update is called once per frame
 	void Update()
@@ -62,14 +67,39 @@ public class UnitController : MonoBehaviour
 		m_rigitbody.velocity = Vector3.zero;
 	}
 
-	private void OnTriggerExit2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("hit");
+        // 瞬間だけ拡大して表示する
+        m_player.transform.localScale = new Vector3(4.0f, 4.0f, 4.0f);
+
+        // サイズを戻す
+        m_player.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        Debug.Log("keep");
+        // 瞬間だけ拡大して表示する
+        //m_player.transform.localScale = new Vector3(4.0f, 4.0f, 4.0f);
+
+        // サイズを戻す
+        m_player.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
+    }
+    
+    private void OnTriggerExit2D(Collider2D collision)
 	{
-		if(collision.tag=="Stage")
-		{
+        if (collision.tag == "Stage")
+        {
 			// 落下フラグを立てる
 			m_isFall = true;
-		}
-	}
+        }
+        Debug.Log("out");
+
+        // サイズを戻す
+        m_player.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
+
+    }
 
 
 	// 落下フラグの取得
@@ -77,4 +107,6 @@ public class UnitController : MonoBehaviour
 	{
 		return m_isFall;
 	}
+
+
 }
