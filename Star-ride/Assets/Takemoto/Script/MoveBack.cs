@@ -14,9 +14,9 @@ public class MoveBack : MonoBehaviour
     void Update()
     {
         transform.Translate(-0.02f, 0, 0);
-        if (transform.position.x < -5.5f)
+        if (transform.position.x < -5.8f)
         {
-            transform.position = new Vector3(5f, 0, 0);
+            transform.position = new Vector3(7.1f, 0, 0);
         }
     }
 }
