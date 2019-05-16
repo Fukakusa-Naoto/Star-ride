@@ -18,6 +18,11 @@ public class UnitController : MonoBehaviour
     // プレイヤーの情報
     private GameObject m_player;
 
+    // 拡大時間
+    private int m_colNum;
+    // 拡大フラグ
+    private bool m_colFlag;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +36,10 @@ public class UnitController : MonoBehaviour
 
         // 剛体コンポーネントの取得
         m_rigitbody = GetComponent<Rigidbody2D>();
+
+        // 拡大フラグ
+        m_colNum = 0;
+        m_colFlag = false;
     }
 
 	// Update is called once per frame
@@ -55,6 +64,21 @@ public class UnitController : MonoBehaviour
 				m_isFall = false;
 			}
 		}
+
+        // 拡大して表示
+        if(m_colFlag == true)
+        {
+            m_colNum++;
+            // 30カウント経ったら元のサイズに戻す
+            if (m_colNum == 30) 
+            {
+                // フラグを初期値に戻す
+                m_colNum = 0;
+                m_colFlag = false;
+                // サイズを戻す
+                m_player.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
+            }
+        }
     }
 
 
@@ -67,26 +91,16 @@ public class UnitController : MonoBehaviour
 		m_rigitbody.velocity = Vector3.zero;
 	}
 
+    // ぶつかった瞬間
     void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("hit");
         // 瞬間だけ拡大して表示する
         m_player.transform.localScale = new Vector3(4.0f, 4.0f, 4.0f);
-
-        // サイズを戻す
-        m_player.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
-    }
-
-    void OnCollisionStay2D(Collision2D collision)
-    {
-        Debug.Log("keep");
-        // 瞬間だけ拡大して表示する
-        //m_player.transform.localScale = new Vector3(4.0f, 4.0f, 4.0f);
-
-        // サイズを戻す
-        m_player.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
+        m_colFlag = true;
     }
     
+    // 離れた瞬間
     private void OnTriggerExit2D(Collider2D collision)
 	{
         if (collision.tag == "Stage")
@@ -95,10 +109,6 @@ public class UnitController : MonoBehaviour
 			m_isFall = true;
         }
         Debug.Log("out");
-
-        // サイズを戻す
-        m_player.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
-
     }
 
 
