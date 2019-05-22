@@ -13,7 +13,7 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        timer = 60;
     }
 
     // Update is called once per frame
@@ -21,7 +21,7 @@ public class Timer : MonoBehaviour
     {
 
         // ゲームが始まってすぐに1秒ごとに１ずつ減らす
-            timer -= 60;
+            timer -= Time.deltaTime;
 
             second = (int)timer;
         // 文字を表示する
