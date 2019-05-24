@@ -70,7 +70,7 @@ public class UnitController : MonoBehaviour
         m_colFlag = false;
 
         // ＋１プレイヤーの取得
-        m_plusOne = GameObject.Find("Canvas/Plus1").GetComponent<Image>();
+        m_plusOne = GameObject.Find("UI_Sentens/Plus1").GetComponent<Image>();
         // ＋１の非表示
         m_plusOne.enabled = false;
 
@@ -153,13 +153,6 @@ public class UnitController : MonoBehaviour
         // 瞬間だけ拡大して表示する
         m_player.transform.localScale = new Vector3(4.0f, 4.0f, 4.0f);
         m_colFlag = true;
-
-        // ＋１の表示
-        m_plusOne.enabled = true;
-
-        // 得点加算
-        m_point++;
-        Debug.Log("得点" + m_point);
     }
 
     //--------------------------------------------------------------------
@@ -175,6 +168,16 @@ public class UnitController : MonoBehaviour
         {
 			// 落下フラグを立てる
 			m_isFall = true;
+        }
+
+        if (collision.tag != "Player")
+        {
+            // ＋１の表示
+            m_plusOne.enabled = true;
+
+            // 得点加算
+            m_point++;
+            Debug.Log("得点" + m_point);
         }
     }
 

@@ -30,6 +30,9 @@ public class EnemyController : MonoBehaviour
     // 剛体コンポーネント
     private Rigidbody2D m_rigidbody = null;
 
+    // 開始時間
+    private int m_cntTime = 0;
+
 
     // メンバ関数の定義 =====================================================
     //--------------------------------------------------------------------
@@ -58,6 +61,13 @@ public class EnemyController : MonoBehaviour
     //--------------------------------------------------------------------
     void Update()
     {
+        // 3秒開始を遅らせる
+        if (m_cntTime < 180)
+        {
+            m_cntTime++;
+        }
+
+        
         // 落下フラグが立っていたら処理を中止
         if (m_unitController.IsFall())
         {
@@ -65,22 +75,25 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
-
-        // 攻撃時間の更新
-        m_attackTime += Time.deltaTime;
-
-        if (m_attackTime > m_attackInterval)
+        // 3秒経っていたら
+        if (m_cntTime >= 180)
         {
-            // 方向を求める
-            Vector3 direction = m_player.transform.position - transform.position;
-            // 力を加える
-            m_rigidbody.AddForce(direction.normalized * m_sinkValue, ForceMode2D.Impulse);
-            // 回転させる
-            float angle = Mathf.Atan2(direction.y, direction.x);
-            transform.rotation = Quaternion.Euler(0, 0, (angle * Mathf.Rad2Deg) - 90.0f);
+            // 攻撃時間の更新
+            m_attackTime += Time.deltaTime;
 
-            // 攻撃時間をリセットする
-            m_attackTime = 0.0f;
+            if (m_attackTime > m_attackInterval)
+            {
+                // 方向を求める
+                Vector3 direction = m_player.transform.position - transform.position;
+                // 力を加える
+                m_rigidbody.AddForce(direction.normalized * m_sinkValue, ForceMode2D.Impulse);
+                // 回転させる
+                float angle = Mathf.Atan2(direction.y, direction.x);
+                transform.rotation = Quaternion.Euler(0, 0, (angle * Mathf.Rad2Deg) - 90.0f);
+
+                // 攻撃時間をリセットする
+                m_attackTime = 0.0f;
+            }
         }
     }
 }

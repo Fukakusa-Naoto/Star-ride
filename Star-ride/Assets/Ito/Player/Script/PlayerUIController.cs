@@ -40,15 +40,18 @@ public class PlayerUIController : MonoBehaviour
     // 縮小用
     private Vector3 m_loScale = new Vector3(3.0f, 3.0f, 3.0f);
 
-	// メンバ関数の定義 =====================================================
-	//--------------------------------------------------------------------
-	//! @summary   初期化処理
-	//!
-	//! @parameter [void] なし
-	//!
-	//! @return    なし
-	//--------------------------------------------------------------------
-	void Start()
+    // 開始時間
+    private int m_cntTime = 0;
+
+    // メンバ関数の定義 =====================================================
+    //--------------------------------------------------------------------
+    //! @summary   初期化処理
+    //!
+    //! @parameter [void] なし
+    //!
+    //! @return    なし
+    //--------------------------------------------------------------------
+    void Start()
     {
 		// カメラの取得
         m_mainCamera = Camera.main;
@@ -57,9 +60,26 @@ public class PlayerUIController : MonoBehaviour
     }
 
 
-
     //--------------------------------------------------------------------
     //! @summary   更新処理
+    //!
+    //! @parameter [void] なし
+    //!
+    //! @return    なし
+    //--------------------------------------------------------------------
+    void Update()
+    {
+        // 4秒開始を遅らせる
+        if (m_cntTime < 240)
+        {
+            m_cntTime++;
+            // プレイヤーは正面を向く
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+    }
+
+    //--------------------------------------------------------------------
+    //! @summary   送る力の更新処理
     //!
     //! @parameter [void] なし
     //!
@@ -160,22 +180,27 @@ public class PlayerUIController : MonoBehaviour
 	//--------------------------------------------------------------------
 	public void OnMouseDrag()
 	{
-		var position = this.GetMousePosition();
+        // 4秒経って居たら
+        if (m_cntTime >= 240)
+        {
+            var position = this.GetMousePosition();
 
-		// チャージする
-		m_sinkValue += Time.deltaTime * 20.0f;
+            // チャージする
+            m_sinkValue += Time.deltaTime * 20.0f;
 
-        // ドラッグした距離を求める
-		m_currentForce = position - m_dragStart;
+            // ドラッグした距離を求める
+            m_currentForce = position - m_dragStart;
 
-        // 送る力が上限以上だったら上限値に戻す
-		if (m_sinkValue > MAX_MAGNITUDE) m_sinkValue = MAX_MAGNITUDE;
+            // 送る力が上限以上だったら上限値に戻す
+            if (m_sinkValue > MAX_MAGNITUDE) m_sinkValue = MAX_MAGNITUDE;
 
-        // 正規化しベクトルは同じ方向は維持したままで、長さを1にする
-		m_currentForce = m_currentForce.normalized * m_sinkValue;
+            // 正規化しベクトルは同じ方向は維持したままで、長さを1にする
+            m_currentForce = m_currentForce.normalized * m_sinkValue;
 
-        // 押している間は小さくする
-        LongPressDown();
+            // 押している間は小さくする
+            LongPressDown();
+        }
+    
     }
 
 
