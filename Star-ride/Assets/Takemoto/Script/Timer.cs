@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-   public float timer;
-   public Text timerText;
-   int second;
-    float countTimer = 0;
+    public float timer;
+    public Text timerText;
+    private int second;
+    private float countTimer = 0.0f;
 
     // Start is called before the first frame update
     void Start()
