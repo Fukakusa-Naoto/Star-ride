@@ -16,6 +16,7 @@ using UnityEngine;
 // クラスの定義 =============================================================
 public class EnemyController : MonoBehaviour
 {
+    // <メンバ変数>
     // 攻撃のインターバル
     private float m_attackInterval = 3.0f;
     // 攻撃までの時間

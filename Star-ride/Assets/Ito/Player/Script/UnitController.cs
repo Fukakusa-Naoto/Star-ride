@@ -17,8 +17,11 @@ using UnityEngine.UI;
 // クラスの定義 =============================================================
 public class UnitController : MonoBehaviour
 {
-	private Vector3 m_startPosition;
-	private Rigidbody2D m_rigitbody = null;
+    // <メンバ変数>
+    // 最初の座標
+    private Vector3 m_startPosition;
+    // 剛体コンポーネント
+    private Rigidbody2D m_rigitbody = null;
 
 	// 落下フラグ
 	private bool m_isFall;
@@ -36,8 +39,10 @@ public class UnitController : MonoBehaviour
     // 拡大フラグ
     private bool m_colFlag;
 
-    // ＋１の情報
+    // ＋１の画像情報
     private Image m_plusOne;
+    // ＋１の得点情報
+    public int m_point;
 
     // メンバ関数の定義 =====================================================
     //--------------------------------------------------------------------
@@ -151,6 +156,10 @@ public class UnitController : MonoBehaviour
 
         // ＋１の表示
         m_plusOne.enabled = true;
+
+        // 得点加算
+        m_point++;
+        Debug.Log("得点" + m_point);
     }
 
     //--------------------------------------------------------------------

@@ -28,15 +28,17 @@ public class PlayerUIController : MonoBehaviour
 	private Vector2 m_sendForce = Vector2.zero;
 	// 発射方向の力
 	private Vector3 m_currentForce = Vector3.zero;
+
 	// メインカメラ
 	private Camera m_mainCamera = null;
 	// メインカメラ座標
 	private Transform m_mainCameraTransform = null;
+
 	// ドラッグ開始点
 	private Vector3 m_dragStart = Vector3.zero;
 
     // 縮小用
-    Vector3 m_loScale = new Vector3(3.0f, 3.0f, 3.0f);
+    private Vector3 m_loScale = new Vector3(3.0f, 3.0f, 3.0f);
 
 	// メンバ関数の定義 =====================================================
 	//--------------------------------------------------------------------
