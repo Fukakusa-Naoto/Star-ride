@@ -1,5 +1,5 @@
 ﻿//__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
-//! @file		PlayerUIController_F.cs
+//! @file		PlayerUIController.cs
 //!
 //! @summary	プレイヤーを制御するUIの制御に関するC#スクリプト
 //!
@@ -13,9 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 // クラスの定義 =============================================================
-public class PlayerUIController_F : MonoBehaviour
+public class PlayerUIController : MonoBehaviour
 {
 	// <メンバ定数>
 	// 最大付与力量

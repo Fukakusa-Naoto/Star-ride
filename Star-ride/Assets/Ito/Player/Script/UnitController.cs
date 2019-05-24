@@ -1,8 +1,20 @@
-﻿using System.Collections;
+﻿//__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
+//! @file		UnitController.cs
+//!
+//! @summary	プレイヤーを制御するUIの制御に関するC#スクリプト
+//!
+//! @date		2019.04.05
+//!
+//! @author		深草直斗
+//__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
+
+// 名前空間の省略 ===========================================================
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// クラスの定義 =============================================================
 public class UnitController : MonoBehaviour
 {
 	private Vector3 m_startPosition;

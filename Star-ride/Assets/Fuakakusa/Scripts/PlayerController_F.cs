@@ -1,11 +1,23 @@
-﻿using System.Collections;
+﻿//__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
+//! @file		PlayerUIController_F.cs
+//!
+//! @summary	プレイヤーを制御するUIの制御に関するC#スクリプト
+//!
+//! @date		2019.04.05
+//!
+//! @author		深草直斗
+//__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
+
+// 名前空間の省略 ===========================================================
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// クラスの定義 =============================================================
 public class PlayerController_F : MonoBehaviour
 {
 	private Rigidbody2D m_rigidbody = null;
-	private PlayerUIController_F m_UIController = null;
+	private PlayerUIController m_UIController = null;
 	private UnitController m_UnitController = null;
 
 
@@ -13,7 +25,7 @@ public class PlayerController_F : MonoBehaviour
 	void Start()
     {
 		m_rigidbody = GetComponent<Rigidbody2D>();
-		m_UIController = GameObject.Find("ControllerUI").GetComponent<PlayerUIController_F>();
+		m_UIController = GameObject.Find("ControllerUI").GetComponent<PlayerUIController>();
 		m_UnitController = GetComponent<UnitController>();
 	}
 
