@@ -31,20 +31,12 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-<<<<<<< HEAD
     filterMode: -1
-=======
-    filterMode: 1
->>>>>>> 8e4236487a4a80c97addee3a45ecd1ba131a7eff
     aniso: -1
     mipBias: -100
     wrapU: 1
     wrapV: 1
-<<<<<<< HEAD
-    wrapW: 1
-=======
-    wrapW: 0
->>>>>>> 8e4236487a4a80c97addee3a45ecd1ba131a7eff
+    wrapW: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -77,8 +69,6 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-<<<<<<< HEAD
-=======
   - serializedVersion: 2
     buildTarget: Standalone
     maxTextureSize: 2048
@@ -112,14 +102,13 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
->>>>>>> 8e4236487a4a80c97addee3a45ecd1ba131a7eff
   spriteSheet:
     serializedVersion: 2
     sprites: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 47ebb71b79ea10d419eb232775eb5dc6
+    spriteID: 
     vertices: []
     indices: 
     edges: []
