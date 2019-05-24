@@ -3,9 +3,9 @@
 //!
 //! @summary	プレイヤーを制御するUIの制御に関するC#スクリプト
 //!
-//! @date		2019.04.05
+//! @date		2019.05.24
 //!
-//! @author		深草直斗
+//! @author		伊藤瑠花
 //__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
 
 // 名前空間の省略 ===========================================================
@@ -103,6 +103,7 @@ public class PlayerUIController : MonoBehaviour
     {
         Vector3 vec = new Vector3(1.2f, 1.2f, 1.2f);
 
+        // 徐々に小さく
         if ((m_loScale.x > vec.x) || (m_loScale.y > vec.y) || (m_loScale.z > vec.z)) 
         {
             m_loScale *= 0.98f;
@@ -110,6 +111,7 @@ public class PlayerUIController : MonoBehaviour
         }
         else
         {
+            // 最小値以下にはしないように
             m_loScale = vec;
             transform.localScale = m_loScale;
         }
@@ -126,20 +128,9 @@ public class PlayerUIController : MonoBehaviour
     //--------------------------------------------------------------------
     private void LongPressUp()
     {
+        // 元の大きさに戻す
         m_loScale = new Vector3(3.0f, 3.0f, 3.0f);
         transform.localScale = m_loScale;
-
-        //Vector3 vec = new Vector3(1.0f, 1.0f, 1.0f);
-        ////Vector3 loc = m_player.GetCompornent<localScale>;
-
-        //if ((m_loScale.x <= vec.x) || (m_loScale.y <= vec.y) || (m_loScale.z <= vec.z))
-        //{
-        //    m_player.transform.localScale *= 1.12f;
-        //}
-        //else
-        //{
-        //    m_player.transform.localScale = vec;
-        //}
     }
 
 
@@ -152,6 +143,7 @@ public class PlayerUIController : MonoBehaviour
     //--------------------------------------------------------------------
     public void OnMouseDown()
 	{
+        // 初期クリック地点を保存
 		m_dragStart = this.GetMousePosition();
     }
 
@@ -182,9 +174,6 @@ public class PlayerUIController : MonoBehaviour
 
         // 押している間は小さくする
         LongPressDown();
-
-        // 動きを求める
-        //Rotation();
     }
 
 
@@ -219,6 +208,7 @@ public class PlayerUIController : MonoBehaviour
 	//--------------------------------------------------------------------
 	private void Rotation()
 	{
+        // プレイヤーの方向指定
 		float angle = Mathf.Atan2(m_currentForce.y, m_currentForce.x);
         transform.rotation = Quaternion.Euler(0, 0, (angle * Mathf.Rad2Deg) - 90.0f);
     }

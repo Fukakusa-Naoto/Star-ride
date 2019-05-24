@@ -1,11 +1,11 @@
 ﻿//__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
 //! @file		UnitController.cs
 //!
-//! @summary	プレイヤーを制御するUIの制御に関するC#スクリプト
+//! @summary	プレイヤーキャラに関するC#スクリプト
 //!
-//! @date		2019.04.05
+//! @date		2019.05.24
 //!
-//! @author		深草直斗
+//! @author		伊藤瑠花
 //__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
 
 // 名前空間の省略 ===========================================================
@@ -39,7 +39,14 @@ public class UnitController : MonoBehaviour
     // ＋１の情報
     private Image m_plusOne;
 
-    // Start is called before the first frame update
+    // メンバ関数の定義 =====================================================
+    //--------------------------------------------------------------------
+    //! @summary   初期化処理
+    //!
+    //! @parameter [void] なし
+    //!
+    //! @return    なし
+    //--------------------------------------------------------------------
     void Start()
     {
 		// 最初の座標を保存
@@ -64,8 +71,14 @@ public class UnitController : MonoBehaviour
 
     }
 
-	// Update is called once per frame
-	void Update()
+    //--------------------------------------------------------------------
+    //! @summary   更新処理
+    //!
+    //! @parameter [void] なし
+    //!
+    //! @return    なし
+    //--------------------------------------------------------------------
+    void Update()
     {
 		if (m_isFall)
 		{
@@ -108,8 +121,14 @@ public class UnitController : MonoBehaviour
     }
 
 
-	// 落下処理
-	void Falling()
+    //--------------------------------------------------------------------
+    //! @summary   落下処理
+    //!
+    //! @parameter [void] なし
+    //!
+    //! @return    なし
+    //--------------------------------------------------------------------
+    void Falling()
 	{
 		// 小さくする
 		transform.localScale *= 0.9f;
@@ -117,7 +136,13 @@ public class UnitController : MonoBehaviour
 		m_rigitbody.velocity = Vector3.zero;
 	}
 
-    // ぶつかった瞬間
+    //--------------------------------------------------------------------
+    //! @summary   衝突時の処理
+    //!
+    //! @parameter [void] なし
+    //!
+    //! @return    なし
+    //--------------------------------------------------------------------
     void OnCollisionEnter2D(Collision2D collision)
     {
         // 瞬間だけ拡大して表示する
@@ -127,8 +152,14 @@ public class UnitController : MonoBehaviour
         // ＋１の表示
         m_plusOne.enabled = true;
     }
-    
-    // 離れた瞬間
+
+    //--------------------------------------------------------------------
+    //! @summary   離れた瞬間の処理
+    //!
+    //! @parameter [void] なし
+    //!
+    //! @return    なし
+    //--------------------------------------------------------------------
     private void OnTriggerExit2D(Collider2D collision)
 	{
         if (collision.tag == "Stage")
@@ -139,8 +170,14 @@ public class UnitController : MonoBehaviour
     }
 
 
-	// 落下フラグの取得
-	public bool IsFall()
+    //--------------------------------------------------------------------
+    //! @summary   落下フラグの取得処理
+    //!
+    //! @parameter [void] なし
+    //!
+    //! @return    なし
+    //--------------------------------------------------------------------
+    public bool IsFall()
 	{
 		return m_isFall;
 	}
