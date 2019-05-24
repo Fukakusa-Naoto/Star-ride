@@ -36,6 +36,8 @@ public class PlayerUIController_F : MonoBehaviour
 	// ドラッグ開始点
 	private Vector3 m_dragStart = Vector3.zero;
 
+    // 縮小用
+    Vector3 m_loScale = new Vector3(3.0f, 3.0f, 3.0f);
 
 	// メンバ関数の定義 =====================================================
 	//--------------------------------------------------------------------
@@ -55,14 +57,14 @@ public class PlayerUIController_F : MonoBehaviour
 
 
 
-	//--------------------------------------------------------------------
-	//! @summary   更新処理
-	//!
-	//! @parameter [void] なし
-	//!
-	//! @return    なし
-	//--------------------------------------------------------------------
-	private void FixedUpdate()
+    //--------------------------------------------------------------------
+    //! @summary   更新処理
+    //!
+    //! @parameter [void] なし
+    //!
+    //! @return    なし
+    //--------------------------------------------------------------------
+    private void FixedUpdate()
 	{
 		// 送る力をリセットする
 		m_sendForce = Vector2.zero;
@@ -91,15 +93,65 @@ public class PlayerUIController_F : MonoBehaviour
 	}
 
 
+    //--------------------------------------------------------------------
+    //! @summary   長押しの時小さくする
+    //!
+    //! @parameter [void] なし
+    //!
+    //! @return    なし
+    //--------------------------------------------------------------------
+    private void LongPressDown()
+    {
+        Vector3 vec = new Vector3(1.2f, 1.2f, 1.2f);
 
-	//--------------------------------------------------------------------
-	//! @summary   ドラック開始イベントハンドラ
-	//!
-	//! @parameter [void] なし
-	//!
-	//! @return    なし
-	//--------------------------------------------------------------------
-	public void OnMouseDown()
+        if ((m_loScale.x > vec.x) || (m_loScale.y > vec.y) || (m_loScale.z > vec.z)) 
+        {
+            m_loScale *= 0.98f;
+            transform.localScale = m_loScale;
+        }
+        else
+        {
+            m_loScale = vec;
+            transform.localScale = m_loScale;
+        }
+    }
+
+
+
+    //--------------------------------------------------------------------
+    //! @summary   長押しを離したら元に戻す
+    //!
+    //! @parameter [void] なし
+    //!
+    //! @return    なし
+    //--------------------------------------------------------------------
+    private void LongPressUp()
+    {
+        m_loScale = new Vector3(3.0f, 3.0f, 3.0f);
+        transform.localScale = m_loScale;
+
+        //Vector3 vec = new Vector3(1.0f, 1.0f, 1.0f);
+        ////Vector3 loc = m_player.GetCompornent<localScale>;
+
+        //if ((m_loScale.x <= vec.x) || (m_loScale.y <= vec.y) || (m_loScale.z <= vec.z))
+        //{
+        //    m_player.transform.localScale *= 1.12f;
+        //}
+        //else
+        //{
+        //    m_player.transform.localScale = vec;
+        //}
+    }
+
+
+    //--------------------------------------------------------------------
+    //! @summary   ドラック開始イベントハンドラ
+    //!
+    //! @parameter [void] なし
+    //!
+    //! @return    なし
+    //--------------------------------------------------------------------
+    public void OnMouseDown()
 	{
 		m_dragStart = this.GetMousePosition();
     }
@@ -129,9 +181,12 @@ public class PlayerUIController_F : MonoBehaviour
         // 正規化しベクトルは同じ方向は維持したままで、長さを1にする
 		m_currentForce = m_currentForce.normalized * m_sinkValue;
 
+        // 押している間は小さくする
+        LongPressDown();
+
         // 動きを求める
         //Rotation();
-	}
+    }
 
 
 
@@ -146,8 +201,12 @@ public class PlayerUIController_F : MonoBehaviour
 	{
 		m_sinkValue = 0.0f;
 		m_sendForce = m_currentForce;
+        
         // キャラの画像方向指定
         Rotation();
+
+        // サイズを戻す
+        LongPressUp();
     }
 
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UnitController : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class UnitController : MonoBehaviour
     // 拡大フラグ
     private bool m_colFlag;
 
+    // ＋１の情報
+    private Image m_plusOne;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +44,12 @@ public class UnitController : MonoBehaviour
         // 拡大フラグ
         m_colNum = 0;
         m_colFlag = false;
+
+        // ＋１プレイヤーの取得
+        m_plusOne = GameObject.Find("Canvas/Plus1").GetComponent<Image>();
+        // ＋１の非表示
+        m_plusOne.enabled = false;
+
     }
 
 	// Update is called once per frame
@@ -62,7 +72,8 @@ public class UnitController : MonoBehaviour
 				m_respawnTime = 0.0f;
 				// 落下フラグを戻す
 				m_isFall = false;
-			}
+                m_player.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+            }
 		}
 
         // 拡大して表示
@@ -77,6 +88,9 @@ public class UnitController : MonoBehaviour
                 m_colFlag = false;
                 // サイズを戻す
                 m_player.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
+
+                // ＋１の非表示
+                m_plusOne.enabled = false;
             }
         }
     }
@@ -94,10 +108,12 @@ public class UnitController : MonoBehaviour
     // ぶつかった瞬間
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("hit");
         // 瞬間だけ拡大して表示する
         m_player.transform.localScale = new Vector3(4.0f, 4.0f, 4.0f);
         m_colFlag = true;
+
+        // ＋１の表示
+        m_plusOne.enabled = true;
     }
     
     // 離れた瞬間
@@ -108,7 +124,6 @@ public class UnitController : MonoBehaviour
 			// 落下フラグを立てる
 			m_isFall = true;
         }
-        Debug.Log("out");
     }
 
 

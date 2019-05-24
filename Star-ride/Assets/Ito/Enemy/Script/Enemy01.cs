@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy02 : MonoBehaviour
+public class Enemy01 : MonoBehaviour
 {
     public Transform target;    //追いかける対象 -オブジェクトをインスペクタから登録できるように
     public GameObject enemy;
