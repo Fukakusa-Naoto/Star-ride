@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartDirector : MonoBehaviour
+public class LoadPlay : MonoBehaviour
 {
+    GameObject obj;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,11 +24,12 @@ public class StartDirector : MonoBehaviour
             // マウスが触れたとき
             if (hit2d)
             {
-                if (hit2d.transform.name == "Restart")
+                if (hit2d.transform.name == "Revenge")
                 {
-                    SceneManager.LoadScene("TitleScene");
+                   SceneManager.LoadScene("GameScene");
                 }
             }
         }
     }
+
 }
