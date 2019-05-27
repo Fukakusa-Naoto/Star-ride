@@ -42,7 +42,7 @@ public class UnitController : MonoBehaviour
     // ＋１の画像情報
     private Image m_plusOne;
     // ＋１の得点情報
-    public int m_point;
+    public static int m_point;
 
     // メンバ関数の定義 =====================================================
     //--------------------------------------------------------------------
