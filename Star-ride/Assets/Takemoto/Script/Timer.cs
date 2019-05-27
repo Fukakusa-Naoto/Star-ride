@@ -10,6 +10,8 @@ public class Timer : MonoBehaviour
     private int second;
     private float countTimer = 0.0f;
 
+    private int cntTimer = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,13 +21,21 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 4秒待つ
+        if (cntTimer < 240) 
+        {
+            cntTimer++;
+        }
 
-        // ゲームが始まってすぐに1秒ごとに１ずつ減らす
+        // 4秒経過したら
+        if (cntTimer >= 240)
+        {
+            // ゲームが始まってすぐに1秒ごとに１ずつ減らす
             timer -= Time.deltaTime;
 
             second = (int)timer;
-        // 文字を表示する
+            // 文字を表示する
             timerText.text = second.ToString();
-            
+        }
     }
 }

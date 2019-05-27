@@ -1,7 +1,7 @@
 ﻿//__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
-//! @file		PlayerUIController.cs
+//! @file		ReadyTimer.cs
 //!
-//! @summary	プレイヤー落下に関するC#スクリプト
+//! @summary	スタートに関するC#スクリプト
 //!
 //! @date		2019.05.24
 //!
@@ -12,13 +12,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // クラスの定義 =============================================================
-public class PlayerController : MonoBehaviour
+public class ReadyTimer : MonoBehaviour
 {
-    private Rigidbody2D m_rigidbody = null;
-    private PlayerUIController m_UIController = null;
-    private UnitController m_UnitController = null;
+
+    // <メンバ変数>
+    // Readyの画像情報
+    private Image m_ready;
+    // Goの画像情報
+    private Image m_go;
+
+    // カウント
+    private int m_cnt = 0;
 
     // メンバ関数の定義 =====================================================
     //--------------------------------------------------------------------
@@ -30,9 +37,12 @@ public class PlayerController : MonoBehaviour
     //--------------------------------------------------------------------
     void Start()
     {
-        m_rigidbody = GetComponent<Rigidbody2D>();
-        m_UIController = GameObject.Find("ControllerUI").GetComponent<PlayerUIController>();
-        m_UnitController = GetComponent<UnitController>();
+        // 画像の取得
+        m_ready = GameObject.Find("UI_Sentens/Ready").GetComponent<Image>();
+        m_go = GameObject.Find("UI_Sentens/Go").GetComponent<Image>();
+
+        // 最初は非表示
+        m_go.enabled = false;
     }
 
     //--------------------------------------------------------------------
@@ -44,15 +54,18 @@ public class PlayerController : MonoBehaviour
     //--------------------------------------------------------------------
     void Update()
     {
-        // 落下フラグが立っていたら更新しない
-        if (m_UnitController.IsFall()) return;
+        // 時間の加算
+        m_cnt++;
+        //Debug.Log(m_cnt);
 
-        m_rigidbody.AddForce(m_UIController.GetSendForce(), ForceMode2D.Impulse);
-
-        // 減速処理
-        if (m_rigidbody.velocity.magnitude > 0.8f) m_rigidbody.velocity *= 0.9f;
-
-        // 回転の反映
-        transform.rotation = m_UIController.GetRotation();
+        if (m_cnt >= 240)              // 4秒後に消す
+        {
+            m_go.enabled = false;
+        }
+        else if (m_cnt >= 120)         // 2秒後に消して表示
+        {
+            m_ready.enabled = false;
+            m_go.enabled = true;
+        }
     }
 }
