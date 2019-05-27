@@ -155,6 +155,7 @@ public class UnitController : MonoBehaviour
         m_colFlag = true;
     }
 
+
     //--------------------------------------------------------------------
     //! @summary   離れた瞬間の処理
     //!
@@ -166,18 +167,16 @@ public class UnitController : MonoBehaviour
 	{
         if (collision.tag == "Stage")
         {
-			// 落下フラグを立てる
-			m_isFall = true;
-        }
+            // 落下フラグを立てる
+            m_isFall = true;
 
-        if (collision.tag != "Player")
-        {
             // ＋１の表示
             m_plusOne.enabled = true;
 
             // 得点加算
             m_point++;
             Debug.Log("得点" + m_point);
+
         }
     }
 

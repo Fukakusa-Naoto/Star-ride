@@ -8,8 +8,6 @@ public class Timer : MonoBehaviour
     public float timer;
     public Text timerText;
     private int second;
-    private float countTimer = 0.0f;
-
     private int cntTimer = 0;
 
     // Start is called before the first frame update
