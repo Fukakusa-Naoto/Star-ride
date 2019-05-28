@@ -40,8 +40,8 @@ public class PlayerUIController : MonoBehaviour
     // 縮小用
     private Vector3 m_loScale = new Vector3(3.0f, 3.0f, 3.0f);
 
-    // 開始時間
-    private int m_cntTime = 0;
+    // 時間
+    private ReadyTimer m_readyTimer = null;
 
     // メンバ関数の定義 =====================================================
     //--------------------------------------------------------------------
@@ -57,6 +57,8 @@ public class PlayerUIController : MonoBehaviour
         m_mainCamera = Camera.main;
 		// カメラの座標情報の取得
         m_mainCameraTransform = m_mainCamera.transform;
+        // Scriptを取得
+        m_readyTimer = GameObject.Find("UIEvent").GetComponent<ReadyTimer>();
     }
 
 
@@ -70,9 +72,8 @@ public class PlayerUIController : MonoBehaviour
     void Update()
     {
         // 4秒開始を遅らせる
-        if (m_cntTime < 240)
+        if (m_readyTimer.Ready() != true)
         {
-            m_cntTime++;
             // プレイヤーは正面を向く
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
@@ -93,14 +94,14 @@ public class PlayerUIController : MonoBehaviour
 
 
 
-	//--------------------------------------------------------------------
-	//! @summary   マウス座標をワールド座標に変換して取得
-	//!
-	//! @parameter [void] なし
-	//!
-	//! @return    変換後の座標
-	//--------------------------------------------------------------------
-	private Vector3 GetMousePosition()
+    //--------------------------------------------------------------------
+    //! @summary   マウス座標をワールド座標に変換して取得
+    //!
+    //! @parameter [Vector3] なし
+    //!
+    //! @return    変換後の座標
+    //--------------------------------------------------------------------
+    private Vector3 GetMousePosition()
 	{
 		// マウスから取得できないZ座標を補完する
 		Vector3 position = Input.mousePosition;
@@ -181,7 +182,7 @@ public class PlayerUIController : MonoBehaviour
 	public void OnMouseDrag()
 	{
         // 4秒経って居たら
-        if (m_cntTime >= 240)
+        if (m_readyTimer.Ready() == true)
         {
             var position = this.GetMousePosition();
 
@@ -241,28 +242,28 @@ public class PlayerUIController : MonoBehaviour
     }
 
 
-	//--------------------------------------------------------------------
-	//! @summary   移動量を送る
-	//!
-	//! @parameter [void] なし
-	//!
-	//! @return    なし
-	//--------------------------------------------------------------------
-	public Vector2 GetSendForce()
+    //--------------------------------------------------------------------
+    //! @summary   移動量を送る
+    //!
+    //! @parameter [Vector2] なし
+    //!
+    //! @return    送る力
+    //--------------------------------------------------------------------
+    public Vector2 GetSendForce()
 	{
 		return m_sendForce;
 	}
 
 
 
-	//--------------------------------------------------------------------
-	//! @summary   回転角を送る
-	//!
-	//! @parameter [void] なし
-	//!
-	//! @return    なし
-	//--------------------------------------------------------------------
-	public Quaternion GetRotation()
+    //--------------------------------------------------------------------
+    //! @summary   回転角を送る
+    //!
+    //! @parameter [Quaternion] なし
+    //!
+    //! @return    角度
+    //--------------------------------------------------------------------
+    public Quaternion GetRotation()
 	{
 		return transform.rotation;
 	}

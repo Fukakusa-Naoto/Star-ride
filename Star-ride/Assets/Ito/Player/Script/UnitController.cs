@@ -103,6 +103,9 @@ public class UnitController : MonoBehaviour
 				// 落下フラグを戻す
 				m_isFall = false;
                 m_player.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+
+                // ＋１の非表示
+                m_plusOne.enabled = false;
             }
 		}
 
@@ -184,9 +187,9 @@ public class UnitController : MonoBehaviour
     //--------------------------------------------------------------------
     //! @summary   落下フラグの取得処理
     //!
-    //! @parameter [void] なし
+    //! @parameter [bool] なし
     //!
-    //! @return    なし
+    //! @return    落下フラグ
     //--------------------------------------------------------------------
     public bool IsFall()
 	{
