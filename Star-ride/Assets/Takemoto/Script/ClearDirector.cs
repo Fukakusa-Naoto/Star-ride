@@ -17,7 +17,7 @@ public class ClearDirector : MonoBehaviour
     void Update()
     {
         // 時間経過でシーン移動
-        if (Time.time - startTime > 60f)
+        if (Time.time - startTime > 66f)
         {
             SceneManager.LoadScene("ResultScene");
         }

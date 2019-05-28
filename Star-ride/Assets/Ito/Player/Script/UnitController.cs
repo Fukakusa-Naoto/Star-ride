@@ -42,7 +42,7 @@ public class UnitController : MonoBehaviour
     // ＋１の画像情報
     private Image m_plusOne;
     // ＋１の得点情報
-    public int m_point;
+    public static int m_point;
 
     // メンバ関数の定義 =====================================================
     //--------------------------------------------------------------------
@@ -103,6 +103,9 @@ public class UnitController : MonoBehaviour
 				// 落下フラグを戻す
 				m_isFall = false;
                 m_player.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+
+                // ＋１の非表示
+                m_plusOne.enabled = false;
             }
 		}
 
@@ -155,6 +158,7 @@ public class UnitController : MonoBehaviour
         m_colFlag = true;
     }
 
+
     //--------------------------------------------------------------------
     //! @summary   離れた瞬間の処理
     //!
@@ -166,18 +170,16 @@ public class UnitController : MonoBehaviour
 	{
         if (collision.tag == "Stage")
         {
-			// 落下フラグを立てる
-			m_isFall = true;
-        }
+            // 落下フラグを立てる
+            m_isFall = true;
 
-        if (collision.tag != "Player")
-        {
             // ＋１の表示
             m_plusOne.enabled = true;
 
             // 得点加算
             m_point++;
             Debug.Log("得点" + m_point);
+
         }
     }
 
@@ -185,9 +187,9 @@ public class UnitController : MonoBehaviour
     //--------------------------------------------------------------------
     //! @summary   落下フラグの取得処理
     //!
-    //! @parameter [void] なし
+    //! @parameter [bool] なし
     //!
-    //! @return    なし
+    //! @return    落下フラグ
     //--------------------------------------------------------------------
     public bool IsFall()
 	{

@@ -30,9 +30,8 @@ public class EnemyController : MonoBehaviour
     // 剛体コンポーネント
     private Rigidbody2D m_rigidbody = null;
 
-    // 開始時間
-    private int m_cntTime = 0;
-
+    // 時間
+    private ReadyTimer m_readyTimer = null;
 
     // メンバ関数の定義 =====================================================
     //--------------------------------------------------------------------
@@ -50,6 +49,9 @@ public class EnemyController : MonoBehaviour
         m_unitController = GetComponent<UnitController>();
         // 剛体コンポーネントの取得
         m_rigidbody = GetComponent<Rigidbody2D>();
+
+        // Scriptを取得
+        m_readyTimer = GameObject.Find("UIEvent").GetComponent<ReadyTimer>();
     }
 
     //--------------------------------------------------------------------
@@ -60,14 +62,7 @@ public class EnemyController : MonoBehaviour
     //! @return    なし
     //--------------------------------------------------------------------
     void Update()
-    {
-        // 3秒開始を遅らせる
-        if (m_cntTime < 180)
-        {
-            m_cntTime++;
-        }
-
-        
+    {        
         // 落下フラグが立っていたら処理を中止
         if (m_unitController.IsFall())
         {
@@ -75,8 +70,8 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
-        // 3秒経っていたら
-        if (m_cntTime >= 180)
+        // 4秒経っていたら
+        if (m_readyTimer.Ready() == true)
         {
             // 攻撃時間の更新
             m_attackTime += Time.deltaTime;
