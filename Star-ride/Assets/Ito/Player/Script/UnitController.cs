@@ -31,13 +31,18 @@ public class UnitController : MonoBehaviour
 	// 復活までの時間
 	private float m_respawnTime = 0.0f;
 
-    // プレイヤーの情報
+    // プレイヤー(ContlorlerUI)の情報
+    private GameObject m_playerUI;
+    // プレイヤー(Player)の情報
     private GameObject m_player;
 
     // 拡大時間
     private int m_colNum;
     // 拡大フラグ
     private bool m_colFlag;
+
+    // パーティクルシステム
+    private CrushEffect m_crush = null;
 
     // ＋１の画像情報
     private Image m_plusOne;
@@ -59,8 +64,10 @@ public class UnitController : MonoBehaviour
 
 		m_isFall = false;
 
-        // プレイヤーの取得
-        m_player = GameObject.Find("ControllerUI");
+        // プレイヤー(ContlorlerUI)の取得
+        m_playerUI = GameObject.Find("ControllerUI");
+        // プレイヤー(Player)の取得
+        m_player = GameObject.Find("Player");
 
         // 剛体コンポーネントの取得
         m_rigitbody = GetComponent<Rigidbody2D>();
@@ -68,6 +75,9 @@ public class UnitController : MonoBehaviour
         // 拡大フラグ
         m_colNum = 0;
         m_colFlag = false;
+
+        // Scriptを取得
+        m_crush = GameObject.Find("Crash").GetComponent<CrushEffect>();
 
         // ＋１プレイヤーの取得
         m_plusOne = GameObject.Find("UI_Sentens/Plus1").GetComponent<Image>();
@@ -102,7 +112,7 @@ public class UnitController : MonoBehaviour
 				m_respawnTime = 0.0f;
 				// 落下フラグを戻す
 				m_isFall = false;
-                m_player.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                m_playerUI.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
 
                 // ＋１の非表示
                 m_plusOne.enabled = false;
@@ -120,7 +130,7 @@ public class UnitController : MonoBehaviour
                 m_colNum = 0;
                 m_colFlag = false;
                 // サイズを戻す
-                m_player.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
+                m_playerUI.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
 
                 // ＋１の非表示
                 m_plusOne.enabled = false;
@@ -154,8 +164,11 @@ public class UnitController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         // 瞬間だけ拡大して表示する
-        m_player.transform.localScale = new Vector3(4.0f, 4.0f, 4.0f);
+        m_playerUI.transform.localScale = new Vector3(4.0f, 4.0f, 4.0f);
         m_colFlag = true;
+
+        // 当たる際のエフェクト
+        m_crush.StartEffect(m_player.transform.position);
     }
 
 
