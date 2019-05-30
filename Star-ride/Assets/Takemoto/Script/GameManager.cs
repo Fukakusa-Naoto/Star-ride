@@ -27,5 +27,17 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        switch (Screen.orientation)
+        {
+            // 横画面のとき
+            case ScreenOrientation.LandscapeLeft:
+                // 縦画面にする
+                Screen.orientation = ScreenOrientation.Portrait;
+                break;
+            case ScreenOrientation.LandscapeRight:
+                // 縦画面にする
+                Screen.orientation = ScreenOrientation.Portrait;
+                break;
+        }
     }
 }
