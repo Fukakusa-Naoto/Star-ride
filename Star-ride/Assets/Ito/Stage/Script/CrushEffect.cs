@@ -24,7 +24,7 @@ public class CrushEffect : MonoBehaviour
 
     public void StartEffect(Vector3 vec)
     {
-
+        // パーティクルシステムを発生させる
         transform.position = vec;
         m_particle.Play();
     }

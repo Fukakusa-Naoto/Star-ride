@@ -44,6 +44,6 @@ public class Point : MonoBehaviour
     void Update()
     {
         // 得点の表示（Text）
-        this.m_score.GetComponent<Text>().text = "得点" + UnitController.m_point.ToString("D1") + "点";
+        this.m_score.GetComponent<Text>().text = "得点" + UnitController.m_point.ToString("D2") + "点";
     }
 }
