@@ -44,9 +44,13 @@ public class ReadyTimer : MonoBehaviour
         m_go = GameObject.Find("UI_Sentens/Go").GetComponent<Image>();
         m_timeup = GameObject.Find("UI_Sentens/Timeup").GetComponent<Image>();
 
+        // 初期化
+        m_cnt = 0;
+
         // 最初は非表示
         m_go.enabled = false;
         m_timeup.enabled = false;
+
     }
 
     //--------------------------------------------------------------------
