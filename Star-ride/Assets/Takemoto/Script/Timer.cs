@@ -9,9 +9,9 @@ public class Timer : MonoBehaviour
     public Text timerText;
     private int second;
 
-    // 時間
+     // 時間
     private ReadyTimer m_readyTimer = null;
-
+    
     // Start is called before the first frame update
     void Start()
     {

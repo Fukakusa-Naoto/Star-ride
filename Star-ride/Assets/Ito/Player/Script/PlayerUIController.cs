@@ -39,6 +39,9 @@ public class PlayerUIController : MonoBehaviour
 
     // 縮小用
     private Vector3 m_loScale = new Vector3(3.0f, 3.0f, 3.0f);
+    // パーティクルシステム
+    private ParticleSystem m_particle;
+
 
     // 時間
     private ReadyTimer m_readyTimer = null;
@@ -57,8 +60,11 @@ public class PlayerUIController : MonoBehaviour
         m_mainCamera = Camera.main;
 		// カメラの座標情報の取得
         m_mainCameraTransform = m_mainCamera.transform;
-        // Scriptを取得
+        // Scriptの取得
         m_readyTimer = GameObject.Find("UIEvent").GetComponent<ReadyTimer>();
+        // パーティクルシステムの取得
+        m_particle = GameObject.Find("Player").GetComponent<ParticleSystem>();
+        m_particle.Stop();
     }
 
 
@@ -138,6 +144,8 @@ public class PlayerUIController : MonoBehaviour
             m_loScale = vec;
             transform.localScale = m_loScale;
         }
+
+        m_particle.Play();
     }
 
 
@@ -154,6 +162,8 @@ public class PlayerUIController : MonoBehaviour
         // 元の大きさに戻す
         m_loScale = new Vector3(3.0f, 3.0f, 3.0f);
         transform.localScale = m_loScale;
+
+        m_particle.Stop();
     }
 
 
